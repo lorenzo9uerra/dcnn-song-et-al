@@ -107,7 +107,7 @@ def load_data_road(attack_type):
 def load_data_in_vehicle(car_brand, label):
     if os.path.exists(
         f"data/preprocessed/in_vehicle/{car_brand}_{label}_features.npy"
-    ) and os.path.exists(f"data/preprocessed/road/{car_brand}_{label}_labels.npy"):
+    ) and os.path.exists(f"data/preprocessed/in_vehicle/{car_brand}_{label}_labels.npy"):
         print("Loading Preprocessed Data")
         X = np.load(f"data/preprocessed/in_vehicle/{car_brand}_{label}_features.npy")
         y = np.load(f"data/preprocessed/in_vehicle/{car_brand}_{label}_labels.npy")
@@ -139,8 +139,8 @@ def load_hcrl(attack_type):
     ) and os.path.exists(
         f"data/preprocessed/car-hacking-dataset/{attack_type}_labels.npy"
     ):
-        X = np.load(f"data/preprocessed/road/{attack_type}_features.npy")
-        y = np.load(f"data/preprocessed/road/{attack_type}_labels.npy")
+        X = np.load(f"data/preprocessed/car-hacking-dataset/{attack_type}_features.npy")
+        y = np.load(f"data/preprocessed/car-hacking-dataset/{attack_type}_labels.npy")
     else:
         data = pd.read_csv(
             f"data/car-hacking-dataset/{filenames[attack_type]}",
