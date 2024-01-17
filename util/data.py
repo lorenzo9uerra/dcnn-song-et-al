@@ -85,7 +85,7 @@ def load_data_road(attack_type):
         X = data["ID"].apply(lambda x: int(x, 16))
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=False)
         print(y_train.value_counts())
-        smote = SMOTE(sampling_strategy={y_train.unique()[1]: 100000})
+        smote = SMOTE(sampling_strategy={class_label: 100000 for class_label in range(1,12)})
         X_train, y_train = smote.fit_resample(X_train.values.reshape(-1, 1), y_train)
         print(y_train.value_counts())
         X_train = pd.Series(X_train.flatten())
