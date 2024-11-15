@@ -107,7 +107,9 @@ def load_data_road(attack_type):
 def load_data_in_vehicle(car_brand, label):
     if os.path.exists(
         f"data/preprocessed/in_vehicle/{car_brand}_{label}_features.npy"
-    ) and os.path.exists(f"data/preprocessed/in_vehicle/{car_brand}_{label}_labels.npy"):
+    ) and os.path.exists(
+        f"data/preprocessed/in_vehicle/{car_brand}_{label}_labels.npy"
+    ):
         print("Loading Preprocessed Data")
         X = np.load(f"data/preprocessed/in_vehicle/{car_brand}_{label}_features.npy")
         y = np.load(f"data/preprocessed/in_vehicle/{car_brand}_{label}_labels.npy")
@@ -123,7 +125,9 @@ def load_data_in_vehicle(car_brand, label):
         pathlib.Path("data/preprocessed/in_vehicle/").mkdir(parents=True, exist_ok=True)
         np.save(f"data/preprocessed/in_vehicle/{car_brand}_{label}_features.npy", X)
         np.save(f"data/preprocessed/in_vehicle/{car_brand}_{label}_labels.npy", y)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=False)
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, shuffle=False
+    )
     return X_train, X_test, y_train, y_test
 
 
@@ -131,7 +135,7 @@ def load_hcrl(attack_type):
     filenames = {
         "dos_data": "DoS_dataset.csv",
         "fuzzy_data": "Fuzzy_dataset.csv",
-        "spoof_gear_data" : "gear_dataset.csv",
+        "spoof_gear_data": "gear_dataset.csv",
         "spoof_rpm_data": "RPM_dataset.csv",
     }
     if os.path.exists(
@@ -162,8 +166,12 @@ def load_hcrl(attack_type):
         data["ID"] = data["ID"].apply(lambda x: int(x, 16))
         X, y = build_frames(data["ID"], data["label"])
         X, y = shuffle(X, y, random_state=42)
-        pathlib.Path("data/preprocessed/car-hacking-dataset/").mkdir(parents=True, exist_ok=True)
-        np.save(f"data/preprocessed/car-hacking-dataset/{attack_type}_features.npy",X)
-        np.save(f"data/preprocessed/car-hacking-dataset/{attack_type}_labels.npy",y)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=False)
+        pathlib.Path("data/preprocessed/car-hacking-dataset/").mkdir(
+            parents=True, exist_ok=True
+        )
+        np.save(f"data/preprocessed/car-hacking-dataset/{attack_type}_features.npy", X)
+        np.save(f"data/preprocessed/car-hacking-dataset/{attack_type}_labels.npy", y)
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, shuffle=False
+    )
     return X_train, X_test, y_train, y_test

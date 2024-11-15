@@ -19,7 +19,6 @@ from keras.models import Model, load_model
 from keras.callbacks import EarlyStopping, ModelCheckpoint
 from sklearn.metrics import classification_report, confusion_matrix, recall_score, f1_score, precision_score
 from keras.optimizers import Adam
-from util.data import load_data_road
 
 def conv2d(x, numfilt, filtsz, strides=1, pad="same", act=True, name=None):
     x = Conv2D(
